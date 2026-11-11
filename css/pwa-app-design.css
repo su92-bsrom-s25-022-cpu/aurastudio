@@ -1,0 +1,299 @@
+/* ================================================
+   AURA STUDIO - PWA APP MODE ONLY
+   Only activates when app is INSTALLED
+   ================================================ */
+
+/* Yeh CSS SIRF app install hone ke baad active hoga */
+@media (display-mode: standalone) {
+
+    :root {
+        --app-primary: #c9a227;
+        --app-dark: #1a1a1a;
+        --app-bg: #ffffff;
+        --app-card: #f9f9f9;
+        --app-text: #1a1a1a;
+        --app-muted: #666666;
+        --app-accent: #ff2e63;
+    }
+
+    /* ===== HIDE WEBSITE ELEMENTS IN APP ===== */
+    .top-bar,
+    .footer,
+    footer,
+    .newsletter,
+    .marquee-bar {
+        display: none !important;
+    }
+
+    /* ===== BODY ADJUSTMENTS ===== */
+    body {
+        background: var(--app-bg) !important;
+        padding-top: 55px !important;
+        padding-bottom: 65px !important;
+    }
+
+    /* ===== APP HEADER (Fixed) ===== */
+    .header {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        background: var(--app-bg) !important;
+        z-index: 999 !important;
+        padding: 10px 15px !important;
+        height: 55px !important;
+        border-bottom: 1px solid #eee !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+    }
+
+    .header .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+        height: 100% !important;
+    }
+
+    .header-content {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        height: 100% !important;
+    }
+
+    .logo h1 {
+        color: var(--app-dark) !important;
+        font-size: 20px !important;
+        margin: 0 !important;
+    }
+
+    .logo h1 span {
+        color: var(--app-primary) !important;
+    }
+
+    .nav-menu {
+        display: none !important;
+    }
+
+    .header-icons {
+        display: flex !important;
+        gap: 15px !important;
+    }
+
+    .header-icons a {
+        color: var(--app-dark) !important;
+        font-size: 22px !important;
+        position: relative !important;
+    }
+
+    .cart-count {
+        background: var(--app-accent) !important;
+        color: white !important;
+        position: absolute !important;
+        top: -5px !important;
+        right: -8px !important;
+        min-width: 18px !important;
+        height: 18px !important;
+        border-radius: 9px !important;
+        font-size: 10px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-weight: 700 !important;
+    }
+
+    .mobile-menu-btn,
+    .search-icon {
+        display: none !important;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+        margin: 0 !important;
+        min-height: 180px !important;
+        max-height: 220px !important;
+    }
+
+    .hero-slide {
+        min-height: 180px !important;
+        padding: 20px !important;
+    }
+
+    .hero-content h2 {
+        color: white !important;
+        font-size: 22px !important;
+    }
+
+    .hero-content .btn {
+        background: white !important;
+        color: var(--app-primary) !important;
+        padding: 10px 24px !important;
+        border-radius: 25px !important;
+        font-weight: 700 !important;
+    }
+
+    /* ===== CATEGORY ICONS (Grid) ===== */
+    .categories-grid {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 8px !important;
+        padding: 15px !important;
+        background: var(--app-bg) !important;
+    }
+
+    .category-card {
+        background: var(--app-card) !important;
+        padding: 12px 6px !important;
+        border-radius: 10px !important;
+        text-align: center !important;
+        border: none !important;
+    }
+
+    .category-card img {
+        width: 45px !important;
+        height: 45px !important;
+        border-radius: 50% !important;
+        border: 2px solid var(--app-primary) !important;
+    }
+
+    .category-card h3 {
+        font-size: 11px !important;
+        color: var(--app-dark) !important;
+        margin-top: 6px !important;
+    }
+
+    /* ===== PRODUCTS GRID ===== */
+    .products-grid,
+    #productsGrid,
+    #products-container {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+        padding: 8px !important;
+    }
+
+    .product-card {
+        background: white !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+        border: none !important;
+    }
+
+    .product-image-wrapper,
+    .product-image {
+        height: 200px !important;
+    }
+
+    .discount-badge {
+        background: var(--app-accent) !important;
+        color: white !important;
+        top: 8px !important;
+        left: 8px !important;
+        padding: 3px 8px !important;
+        border-radius: 4px !important;
+        font-size: 10px !important;
+    }
+
+    .product-info {
+        padding: 10px !important;
+    }
+
+    .product-name {
+        font-size: 12px !important;
+        color: var(--app-dark) !important;
+    }
+
+    .price, .current-price {
+        color: var(--app-accent) !important;
+        font-weight: 700 !important;
+        font-size: 15px !important;
+    }
+
+    .add-to-cart-btn {
+        background: var(--app-dark) !important;
+        color: white !important;
+        border-radius: 20px !important;
+        font-size: 11px !important;
+        padding: 8px !important;
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+        padding: 15px !important;
+    }
+
+    .section-header h2 {
+        color: var(--app-dark) !important;
+        font-size: 18px !important;
+        text-align: left !important;
+    }
+
+    /* ===== BOTTOM NAVIGATION (App Feel) ===== */
+    body::after {
+        content: '';
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 65px;
+        background: white;
+        border-top: 1px solid #eee;
+        z-index: 998;
+    }
+
+    .app-bottom-nav {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        background: white !important;
+        display: flex !important;
+        justify-content: space-around !important;
+        padding: 8px 0 !important;
+        z-index: 999 !important;
+        height: 65px !important;
+        border-top: 1px solid #eee !important;
+    }
+
+    .app-nav-item {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 4px !important;
+        color: var(--app-muted) !important;
+        text-decoration: none !important;
+        font-size: 10px !important;
+    }
+
+    .app-nav-item i {
+        font-size: 20px !important;
+    }
+
+    .app-nav-item.active {
+        color: var(--app-primary) !important;
+    }
+
+    /* ===== WHATSAPP FLOAT ===== */
+    .whatsapp-float {
+        bottom: 85px !important;
+        right: 15px !important;
+    }
+
+    /* ===== BACK TO TOP ===== */
+    .back-to-top {
+        display: none !important;
+    }
+}
+
+/* If PWA installed but display-mode not detected, use this class-based fallback */
+body.pwa-installed .top-bar,
+body.pwa-installed .footer,
+body.pwa-installed footer,
+body.pwa-installed .newsletter {
+    display: none !important;
+}
+
+body.pwa-installed .app-bottom-nav {
+    display: flex !important;
+}
