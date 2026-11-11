@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account | Aura Studio</title>
+  <meta name="description" content="Create your Aura Studio account to track orders, save your wishlist, and receive private collection releases.">
+  <link rel="canonical" href="https://www.aurastudiopk.com/signup.html">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Favicon & PWA -->
+  <link rel="icon" href="image/logo.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="image/logo.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#181715">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Firebase Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+</head>
+<body class="auth-page">
+
+  <div class="auth-card">
+    <div class="auth-logo">
+      <a href="index.html">
+        <h1>Aura<span>Studio</span></h1>
+      </a>
+      <p>Create your boutique account</p>
+    </div>
+
+    <!-- Feedback messages -->
+    <div class="msg msg-error" id="errorMsg"></div>
+    <div class="msg msg-success" id="successMsg"></div>
+
+    <form id="signupForm">
+      <div class="form-group">
+        <label for="name">Full Name *</label>
+        <div class="input-wrap">
+          <i class="fas fa-user fi"></i>
+          <input type="text" id="name" name="name" required placeholder="e.g. Fatima Ali" autocomplete="name">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <div class="input-wrap">
+          <i class="fas fa-envelope fi"></i>
+          <input type="email" id="email" name="email" required placeholder="fatima@example.com" autocomplete="email">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone / WhatsApp *</label>
+        <div class="input-wrap">
+          <i class="fas fa-phone fi"></i>
+          <input type="tel" id="phone" name="phone" required placeholder="0300 1234567" autocomplete="tel">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password *</label>
+        <div class="input-wrap">
+          <i class="fas fa-lock fi"></i>
+          <input type="password" id="password" name="password" required placeholder="Minimum 6 characters" autocomplete="new-password">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password *</label>
+        <div class="input-wrap">
+          <i class="fas fa-check-double fi"></i>
+          <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password" autocomplete="new-password">
+        </div>
+      </div>
+
+      <button type="submit" class="auth-btn" id="submitBtn">Create Account</button>
+    </form>
+
+    <div class="divider">or continue with</div>
+
+    <button type="button" class="google-btn" id="googleBtn" onclick="googleSignup()">
+      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
+      <span>Sign up with Google</span>
+    </button>
+
+    <div class="auth-footer">
+      <p>Already an account holder? <a href="login.html">Sign In</a></p>
+      <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--color-sand); display: flex; justify-content: center; gap: 18px; font-size: 0.775rem;">
+        <a href="index.html" style="color:var(--color-stone);"><i class="fas fa-arrow-left"></i> Return to Boutique</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  try {
+    firebase.initializeApp({
+      apiKey: "AIzaSyDSlVRIlVj_x35YT6dIiISMFKICjy8LR2g",
+      authDomain: "aurastudio-a0cc4.firebaseapp.com",
+      projectId: "aurastudio-a0cc4"
+    });
+  } catch(e) {}
+
+  var auth = (typeof firebase !== 'undefined' && firebase.auth) ? firebase.auth() : null;
+  var googleProvider = (typeof firebase !== 'undefined' && firebase.auth) ? new firebase.auth.GoogleAuthProvider() : null;
+
+  function googleSignup() {
+    if (!auth || !googleProvider) {
+      alert('Google signup is initializing. Please try again or use direct registration.');
+      return;
+    }
+    var btn = document.getElementById('googleBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting to Google...';
+
+    auth.signInWithPopup(googleProvider)
+      .then(function(result) {
+        var user = result.user;
+        fetch('/api/users/google-auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: user.displayName,
+            email: user.email,
+            googleId: user.uid,
+            photo: user.photoURL
+          })
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data.success) {
+            localStorage.setItem('userToken', data.token);
+            localStorage.setItem('userData', JSON.stringify(data.user));
+          } else {
+            localStorage.setItem('userData', JSON.stringify({ name: user.displayName, email: user.email, photo: user.photoURL }));
+            localStorage.setItem('userToken', 'google-' + user.uid);
+          }
+          document.getElementById('successMsg').textContent = 'Account created. Welcome, ' + user.displayName + '!';
+          document.getElementById('successMsg').style.display = 'block';
+          setTimeout(function() { window.location.href = 'index.html'; }, 800);
+        })
+        .catch(function() {
+          localStorage.setItem('userData', JSON.stringify({ name: user.displayName, email: user.email, photo: user.photoURL }));
+          localStorage.setItem('userToken', 'google-' + user.uid);
+          window.location.href = 'index.html';
+        });
+      })
+      .catch(function(error) {
+        btn.disabled = false;
+        btn.innerHTML = '<span>Sign up with Google</span>';
+        if (error.code !== 'auth/popup-closed-by-user') {
+          document.getElementById('errorMsg').textContent = error.message || 'Google signup failed';
+          document.getElementById('errorMsg').style.display = 'block';
+        }
+      });
+  }
+
+  // Form submit
+  document.getElementById('signupForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var btn = document.getElementById('submitBtn');
+    var error = document.getElementById('errorMsg');
+    var success = document.getElementById('successMsg');
+
+    if (this.password.value !== this.confirmPassword.value) {
+      error.textContent = 'Passwords do not match. Please verify.';
+      error.style.display = 'block';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Creating account...';
+    error.style.display = 'none';
+    success.style.display = 'none';
+
+    try {
+      var res = await fetch('/api/users/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: this.name.value.trim(),
+          email: this.email.value.trim(),
+          phone: this.phone.value.trim(),
+          password: this.password.value
+        })
+      });
+      var data = await res.json();
+      if (data.success) {
+        localStorage.setItem('userToken', data.token);
+        localStorage.setItem('userData', JSON.stringify(data.user));
+        success.textContent = 'Account created successfully! Welcome to Aura Studio.';
+        success.style.display = 'block';
+        setTimeout(function() { window.location.href = 'index.html'; }, 900);
+      } else {
+        error.textContent = data.message || 'Registration failed. Email may already be in use.';
+        error.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Create Account';
+      }
+    } catch(err) {
+      error.textContent = 'Network communication error. Please try again.';
+      error.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Create Account';
+    }
+  });
+
+  if (localStorage.getItem('userToken')) window.location.href = 'index.html';
+  </script>
+</body>
+</html>

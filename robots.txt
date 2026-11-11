@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /products.html
+Allow: /lawn-suits.html
+Allow: /about.html
+Allow: /contact.html
+Allow: /return-policy.html
+Allow: /track-order.htm
+
+# Disallow account, checkout, and administrative routes
+Disallow: /cart.html
+Disallow: /checkout.html
+Disallow: /login.html
+Disallow: /signup.html
+Disallow: /forgot-password.html
+Disallow: /profile.html
+Disallow: /admin/
+Disallow: /api/
+
+Sitemap: https://www.aurastudiopk.com/sitemap.xml

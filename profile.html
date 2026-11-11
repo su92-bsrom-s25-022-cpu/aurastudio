@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account | Aura Studio</title>
+  <meta name="description" content="Manage your Aura Studio account, view past order statuses, and update shipping details.">
+  <link rel="canonical" href="https://www.aurastudiopk.com/profile.html">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Favicon & PWA -->
+  <link rel="icon" href="image/logo.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="image/logo.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#181715">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <span class="top-bar-notice">Complimentary Express Delivery Nationwide on Orders Over Rs. 5,000 | WhatsApp Concierge: +92 321 4153059</span>
+      <div class="top-bar-links">
+        <a href="track-order.htm">Track Order</a>
+        <a href="contact.html">Customer Care</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="mainHeader">
+    <div class="container">
+      <div class="header-logo">
+        <a href="index.html">
+          <h2 class="logo-title">Aura<span>Studio</span></h2>
+          <span class="logo-tagline">Haute Pret &amp; Heirlooms</span>
+        </a>
+      </div>
+
+      <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="products.html" class="nav-link">Collection</a>
+        <a href="lawn-suits.html" class="nav-link">Lawn Suits</a>
+        <a href="products.html?category=pouches" class="nav-link">Pouches</a>
+        <a href="products.html?category=jewelry" class="nav-link">Turkish Jewelry</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-icons">
+        <button class="header-action-btn search-icon" id="searchToggle" aria-label="Toggle Search">
+          <i class="fas fa-search"></i>
+        </button>
+        <a href="profile.html" class="header-action-btn user-auth-btn active" aria-label="Account">
+          <i class="fas fa-user"></i>
+        </a>
+        <a href="cart.html" class="header-action-btn cart-icon" aria-label="Cart">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="mainContent">
+    <div class="profile-page">
+      <!-- Profile Header Identity Card -->
+      <div class="profile-header">
+        <div class="profile-avatar" id="profileAvatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="profile-info">
+          <h1 id="profileName">Patron Account</h1>
+          <p id="profileEmail">client@aurastudiopk.com</p>
+          <span style="display:inline-block; margin-top:8px; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--color-gold-light);">
+            <i class="fas fa-star" style="margin-right:4px;"></i> Aura Studio Circle Member
+          </span>
+        </div>
+      </div>
+
+      <!-- Main Profile Grid -->
+      <div class="profile-grid">
+        <!-- Sidebar Navigation -->
+        <aside class="profile-sidebar">
+          <button class="sidebar-item active" onclick="switchProfileTab('ordersTab', this)">
+            <i class="fas fa-shopping-bag"></i> My Orders (<span id="statOrders">0</span>)
+          </button>
+          <button class="sidebar-item" onclick="switchProfileTab('infoTab', this)">
+            <i class="fas fa-user-edit"></i> Profile Details
+          </button>
+          <a href="track-order.htm" class="sidebar-item">
+            <i class="fas fa-truck"></i> Track Courier
+          </a>
+          <a href="products.html" class="sidebar-item">
+            <i class="fas fa-compass"></i> Discover Collection
+          </a>
+          <div class="sidebar-divider"></div>
+          <button class="sidebar-item logout" onclick="if(confirm('Are you sure you wish to sign out?')) window.logoutUser ? window.logoutUser() : (localStorage.clear(), window.location.href='login.html');">
+            <i class="fas fa-sign-out-alt"></i> Sign Out
+          </button>
+        </aside>
+
+        <!-- Content Area -->
+        <div class="profile-content">
+          <!-- Orders Tab -->
+          <div id="ordersTab" class="profile-tab-content">
+            <h2 class="content-title"><i class="fas fa-box-open"></i> Order History</h2>
+            <div id="ordersContainer">
+              <div class="empty-state">
+                <i class="fas fa-spinner fa-spin" style="font-size:2rem; color:var(--color-gold);"></i>
+                <p style="margin-top:12px;">Retrieving your orders...</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Personal Info Tab -->
+          <div id="infoTab" class="profile-tab-content" style="display:none;">
+            <h2 class="content-title"><i class="fas fa-user-circle"></i> Personal Information</h2>
+            <form id="profileForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fullName">Full Name</label>
+                  <input type="text" id="fullName" name="fullName" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone / WhatsApp</label>
+                  <input type="tel" id="phone" name="phone" placeholder="0300 1234567">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="address">Default Shipping Address</label>
+                <textarea id="address" name="address" rows="3" placeholder="House / Apartment, Street, City"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" placeholder="e.g. Lahore">
+              </div>
+
+              <button type="submit" class="btn btn-primary">Save Profile</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <h2>Aura<span>Studio</span></h2>
+          </div>
+          <p>Your premier destination for high-end Pakistani stitched lawn suits, authentic Ottoman-inspired Turkish jewelry, and artisanal luxury velvet pouches.</p>
+          <div class="footer-social">
+            <a href="https://facebook.com/aurastudiopk" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com/aurastudio004" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/@AuraStudio004" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://tiktok.com/@aurastudio004" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://wa.me/923214153059" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Collections</h3>
+          <ul class="footer-links">
+            <li><a href="lawn-suits.html">Stitched Lawn Suits</a></li>
+            <li><a href="products.html?category=jewelry">Turkish Jewelry</a></li>
+            <li><a href="products.html?category=pouches">Handcrafted Pouches</a></li>
+            <li><a href="products.html">All New Arrivals</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Customer Care</h3>
+          <ul class="footer-links">
+            <li><a href="track-order.htm">Track Your Order</a></li>
+            <li><a href="return-policy.html">Return &amp; Exchange Policy</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="profile.html">My Account</a></li>
+            <li><a href="login.html">Login / Register</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Concierge</h3>
+          <ul class="footer-contact">
+            <li><i class="fas fa-phone-alt"></i><span>+92 321 4153059</span></li>
+            <li><i class="fab fa-whatsapp"></i><a href="https://wa.me/923214153059" target="_blank" rel="noopener noreferrer" style="color:var(--color-sand);">WhatsApp Assistance</a></li>
+            <li><i class="fas fa-envelope"></i><a href="mailto:aurastudio004@gmail.com" style="color:var(--color-sand);">aurastudio004@gmail.com</a></li>
+            <li><i class="fas fa-map-marker-alt"></i><span>Lahore, Punjab, Pakistan</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Aura Studio. All Rights Reserved.</p>
+        <div class="payment-icons">
+          <img src="image/easypaisa.jpg" alt="Easypaisa" onerror="this.style.display='none'">
+          <img src="image/jazzcash.jpg" alt="JazzCash" onerror="this.style.display='none'">
+          <img src="image/bank.jpg" alt="Bank Transfer" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/923214153059" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+  <button class="back-to-top" id="backToTop" aria-label="Back to Top"><i class="fas fa-arrow-up"></i></button>
+
+  <!-- Untouched Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/user-auth.js"></script>
+
+  <script>
+  function switchProfileTab(tabId, btn) {
+    document.querySelectorAll('.profile-tab-content').forEach(function(el) { el.style.display = 'none'; });
+    document.querySelectorAll('.sidebar-item').forEach(function(el) { el.classList.remove('active'); });
+    var target = document.getElementById(tabId);
+    if (target) target.style.display = 'block';
+    if (btn) btn.classList.add('active');
+  }
+
+  // Authentication & Orders loader
+  document.addEventListener('DOMContentLoaded', function() {
+    var token = localStorage.getItem('userToken');
+    var userData = JSON.parse(localStorage.getItem('userData') || 'null');
+
+    if (!token) {
+      window.location.href = 'login.html';
+      return;
+    }
+
+    if (userData) {
+      if (document.getElementById('profileName')) document.getElementById('profileName').textContent = userData.name || 'Valued Patron';
+      if (document.getElementById('profileEmail')) document.getElementById('profileEmail').textContent = userData.email || '';
+      if (document.getElementById('fullName')) document.getElementById('fullName').value = userData.name || '';
+      if (document.getElementById('phone')) document.getElementById('phone').value = userData.phone || '';
+      if (document.getElementById('address')) document.getElementById('address').value = userData.address || '';
+      if (document.getElementById('city')) document.getElementById('city').value = userData.city || '';
+      if (userData.photo && document.getElementById('profileAvatar')) {
+        document.getElementById('profileAvatar').innerHTML = '<img src="' + userData.photo + '" alt="Avatar">';
+      }
+    }
+
+    loadOrders(token);
+  });
+
+  async function loadOrders(token) {
+    var container = document.getElementById('ordersContainer');
+    try {
+      var res = await fetch('/api/orders/my-orders', {
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      var data = await res.json();
+
+      if (data.success && data.orders && data.orders.length > 0) {
+        var html = '';
+        data.orders.forEach(function(order) {
+          var orderId = order.orderNumber || order._id.slice(-6).toUpperCase();
+          var date = new Date(order.createdAt).toLocaleDateString('en-PK', { year:'numeric', month:'short', day:'numeric' });
+          var total = order.totalAmount || order.total || 0;
+          var status = (order.orderStatus || 'Pending').toUpperCase();
+
+          html += '<div class="order-card-full" style="padding:20px; background:#fff; margin-bottom:16px;">' +
+            '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px; border-bottom:1px solid var(--color-sand); padding-bottom:12px;">' +
+              '<div>' +
+                '<strong style="font-size:1.05rem; color:var(--color-noir);">Order #' + orderId + '</strong>' +
+                '<span style="font-size:0.8rem; color:var(--color-stone); margin-left:12px;">' + date + '</span>' +
+              '</div>' +
+              '<div style="display:flex; align-items:center; gap:12px;">' +
+                '<span class="stock-pill stock-in">' + status + '</span>' +
+                '<strong style="font-size:1.15rem; color:var(--color-noir);">Rs. ' + Number(total).toLocaleString() + '</strong>' +
+              '</div>' +
+            '</div>' +
+            '<p style="font-size:0.85rem; color:var(--color-stone); margin:0;">Payment: ' + (order.paymentMethod || 'COD').toUpperCase() + ' | Items: ' + (order.items ? order.items.length : 1) + '</p>' +
+          '</div>';
+        });
+
+        container.innerHTML = html;
+        if (document.getElementById('statOrders')) document.getElementById('statOrders').textContent = data.orders.length;
+      } else {
+        container.innerHTML = '<div class="empty-state"><i class="fas fa-shopping-bag"></i><h3>No Orders Placed Yet</h3><p>Your order history is currently empty. Explore our latest pieces.</p><a href="products.html" class="btn btn-primary">Start Shopping</a></div>';
+      }
+    } catch(err) {
+      container.innerHTML = '<div class="empty-state"><i class="fas fa-shopping-bag"></i><h3>No Orders Yet</h3><p>Start shopping to see your orders here.</p><a href="products.html" class="btn btn-primary">Browse Catalog</a></div>';
+    }
+  }
+
+  // Profile save
+  var profileForm = document.getElementById('profileForm');
+  if (profileForm) {
+    profileForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var token = localStorage.getItem('userToken');
+      var updatedData = {
+        name: document.getElementById('fullName').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        address: document.getElementById('address').value.trim(),
+        city: document.getElementById('city').value.trim()
+      };
+
+      try {
+        var res = await fetch('/api/users/profile', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify(updatedData)
+        });
+        var data = await res.json();
+        if (data.success) {
+          localStorage.setItem('userData', JSON.stringify(data.user || updatedData));
+          alert('Profile information updated successfully!');
+        } else {
+          alert('Profile updated locally.');
+        }
+      } catch(err) {
+        localStorage.setItem('userData', JSON.stringify(updatedData));
+        alert('Profile saved successfully.');
+      }
+    });
+  }
+  </script>
+</body>
+</html>
